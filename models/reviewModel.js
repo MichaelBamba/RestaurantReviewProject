@@ -14,12 +14,23 @@ class RestaurantInfo {
     }
     static async getAllrestaurantData() {
         try {
-            const response = await db.any('SELECT * FROM restaurant INNER JOIN review on restaurant_id = restaurant.id');
+            const response = await db.any('SELECT * FROM restaurant');
             console.log(response)
 
 
 
             return response;
+        }
+        catch (error) {
+            console.error('ERROR:', error);
+            return error;
+        }
+    }
+    static async getRestaurantById(id) {
+        try {
+            const response = await db.any(`select * from restaurant where restaurant.id = ${id}`);
+            console.log(response)
+            return response
         }
         catch (error) {
             console.error('ERROR:', error);

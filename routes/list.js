@@ -4,7 +4,15 @@ const express = require('express'),
 
 
 router.get('/:id?', async (req, res) => {
-    const RestaurantInfo = await reviewModel.getAllrestaurantData();
+    const { id } = req.params;
+
+    let RestaurantInfo = [];
+    if (!!id) {
+        RestaurantInfo = await reviewModel.getRestaurantById(id)
+    }
+    else {
+        RestaurantInfo = await reviewModel.getAllrestaurantData();
+    }
     res
         .render('template', {
             locals: {
@@ -16,4 +24,7 @@ router.get('/:id?', async (req, res) => {
             }
         })
 })
+
+
+
 module.exports = router
