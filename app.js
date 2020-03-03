@@ -8,6 +8,7 @@ const indexRouter = require('./routes/index')
 
 
 const app = express();
+const listController = require('./routes/list')
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -16,6 +17,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/list', listController)
 
 app.engine('html', es6Renderer);
 app.set('views', './views');
