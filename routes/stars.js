@@ -1,0 +1,10 @@
+${
+    RestaurantInfo.map(entry => {
+        return `<p> ${entry.name} is ${entry.stars} stars
+        it is ${entry.distance} miles away. It is a ${entry.category} style Restaurant with ${favorite_dish}
+    </p>`
+    }).join('')
+}
+${
+    ReviewInfo.map(review => {
+        return '<p>${review.review} by ${review.title} )}}</p>'

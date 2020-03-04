@@ -1,5 +1,32 @@
 <ul>
     ${ArrayOfRestaurants.map(dude =>
-    ` <li>${dude.name}</li>`
+    `
+    <li><a href='../list/${dude.id}'>${dude.name}</a>
+        distance ${dude.distance} miles
+    </li>`
+
+
     ).join('')}
 </ul>
+<ul>
+    <H1> REVIEWS</H1>
+    ${ArrayofReview.map (rev =>
+
+    `<p>${rev.title}</p>
+    <p> ${rev.review}</p>
+    `).join('')}
+</ul>
+
+
+
+
+<form action="/" method="post">
+    <input type='hidden' value=${ArrayOfRestaurants[0].id}>
+    <label> Title
+        <input type="text" name='review_title' placeholder='review title'></input>
+    </label>
+    <label> my review
+        <textarea name='review_text' placeholder="review of restaurant"></textarea>
+    </label>
+    <button type="submit"> save review</button>
+</form>

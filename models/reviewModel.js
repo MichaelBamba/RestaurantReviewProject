@@ -15,7 +15,6 @@ class RestaurantInfo {
     static async getAllrestaurantData() {
         try {
             const response = await db.any('SELECT * FROM restaurant');
-            console.log(response)
 
 
 
@@ -29,7 +28,7 @@ class RestaurantInfo {
     static async getRestaurantById(id) {
         try {
             const response = await db.any(`select * from restaurant where restaurant.id = ${id}`);
-            console.log(response)
+
             return response
         }
         catch (error) {
@@ -37,11 +36,23 @@ class RestaurantInfo {
             return error;
         }
     }
-    static async getAllReviewData() {
+    static async getReviewDatabyRestId(id) {
         try {
-            const response = await db.any('SELECT * FROM review');
-            console.log(response)
+            const response = await db.any(`SELECT * FROM review where review.restaurant_id = ${id}`);
+
             return response
+        }
+        catch (error) {
+            console.error('error', error);
+            return error;
+        }
+    }
+    static async addReview(restaurant_id, review_title, review_text) {
+        try {
+            const response = await db.one(`INSERT INTO review (reviewer_id,  restaurant_id,stars, title, review)
+            values ($1, $2, $3, $4, $5) RETURNING id;`, [1, restaurant_id, 3, review_title, review_text]
+            );
+            return response;
         }
         catch (error) {
             console.error('error', error);
